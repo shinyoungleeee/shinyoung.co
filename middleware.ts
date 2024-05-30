@@ -51,10 +51,10 @@ export default async function middleware(req: NextRequest) {
     );
   }
 
-  // special case for `vercel.pub` domain
-  if (hostname === "vercel.pub") {
-    return NextResponse.redirect(
-      "https://vercel.com/blog/platforms-starter-kit",
+  // rewrites for cocktails pages
+  if (hostname == `cocktails.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
+    return NextResponse.rewrite(
+      new URL(`/cocktails${path === "/" ? "" : path}`, req.url),
     );
   }
 
