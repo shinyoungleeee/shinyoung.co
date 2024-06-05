@@ -119,3 +119,25 @@ model Example {
   image         String? @db.Text
   imageBlurhash String? @db.Text
 }
+
+model Cocktail {
+  id          Int                      @id @default(autoincrement())
+  name        String
+  ingredients IngredientsOnCocktails[]
+}
+
+model Ingredient {
+  id        Int                      @id @default(autoincrement())
+  name      String
+  cocktails IngredientsOnCocktails[]
+}
+
+model IngredientsOnCocktails {
+  cocktail     Cocktail   @relation(fields: [cocktailId], references: [id])
+  cocktailId   Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+  quantity     String
+
+  @@id([cocktailId, ingredientId])
+}
