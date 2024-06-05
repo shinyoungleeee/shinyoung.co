@@ -14,7 +14,7 @@ export default function HomePage() {
           </h1>
           <p className="mb-4">
             Hello! I just started building this portfolio website. I plan to
-            make updates everyday. Check back again soon!
+            make updates regularly. Check back again soon!
           </p>
           <div className="my-8">
             <div>
