@@ -45,7 +45,7 @@ export const createSite = async (formData: FormData) => {
         },
       },
     });
-    await revalidateTag(
+    revalidateTag(
       `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
     );
     return response;
@@ -181,11 +181,10 @@ export const updateSite = withSiteAuth(
         `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
         `${site.customDomain}-metadata`,
       );
-      await revalidateTag(
+      revalidateTag(
         `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
       );
-      site.customDomain &&
-        (await revalidateTag(`${site.customDomain}-metadata`));
+      site.customDomain && revalidateTag(`${site.customDomain}-metadata`);
 
       return response;
     } catch (error: any) {
@@ -209,11 +208,10 @@ export const deleteSite = withSiteAuth(async (_: FormData, site: Site) => {
         id: site.id,
       },
     });
-    await revalidateTag(
+    revalidateTag(
       `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
     );
-    response.customDomain &&
-      (await revalidateTag(`${site.customDomain}-metadata`));
+    response.customDomain && revalidateTag(`${site.customDomain}-metadata`);
     return response;
   } catch (error: any) {
     return {
@@ -248,10 +246,10 @@ export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
     },
   });
 
-  await revalidateTag(
+  revalidateTag(
     `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-posts`,
   );
-  site.customDomain && (await revalidateTag(`${site.customDomain}-posts`));
+  site.customDomain && revalidateTag(`${site.customDomain}-posts`);
 
   return response;
 });
@@ -289,17 +287,17 @@ export const updatePost = async (data: Post) => {
       },
     });
 
-    await revalidateTag(
+    revalidateTag(
       `${post.site?.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-posts`,
     );
-    await revalidateTag(
+    revalidateTag(
       `${post.site?.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-${post.slug}`,
     );
 
     // if the site has a custom domain, we need to revalidate those tags too
     post.site?.customDomain &&
-      (await revalidateTag(`${post.site?.customDomain}-posts`),
-      await revalidateTag(`${post.site?.customDomain}-${post.slug}`));
+      (revalidateTag(`${post.site?.customDomain}-posts`),
+      revalidateTag(`${post.site?.customDomain}-${post.slug}`));
 
     return response;
   } catch (error: any) {
@@ -351,17 +349,17 @@ export const updatePostMetadata = withPostAuth(
         });
       }
 
-      await revalidateTag(
+      revalidateTag(
         `${post.site?.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-posts`,
       );
-      await revalidateTag(
+      revalidateTag(
         `${post.site?.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-${post.slug}`,
       );
 
       // if the site has a custom domain, we need to revalidate those tags too
       post.site?.customDomain &&
-        (await revalidateTag(`${post.site?.customDomain}-posts`),
-        await revalidateTag(`${post.site?.customDomain}-${post.slug}`));
+        (revalidateTag(`${post.site?.customDomain}-posts`),
+        revalidateTag(`${post.site?.customDomain}-${post.slug}`));
 
       return response;
     } catch (error: any) {
