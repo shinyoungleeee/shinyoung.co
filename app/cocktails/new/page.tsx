@@ -1,23 +1,30 @@
 "use client";
 
+import { FieldWrapper } from "@/components/form/field-wrapper";
+import { FieldSet } from "@/components/form/fieldset";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { AmountUnit } from "@prisma/client";
 import clsx from "clsx";
 import { Check, Pencil, Trash2 } from "lucide-react";
 import { MouseEventHandler, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const schema = yup
   .object({
     name: yup.string().required("Required"),
+    description: yup.string().required("Required"),
     ingredients: yup
       .array()
       .min(1)
       .of(
         yup.object({
           name: yup.string().required("Required"),
-          amount: yup.number().required("Required").moreThan(0, "Must be > 0"),
+          amount: yup
+            .number()
+            .typeError("Required")
+            .moreThan(0, "Must be > 0")
+            .required("Required"),
           amountUnit: yup.string().required("Required"),
         }),
       )
@@ -39,6 +46,7 @@ export default function CocktailsNewPage() {
   } = useForm({
     defaultValues: {
       name: "",
+      description: "",
       ingredients: [emptyIngredient],
     },
     resolver: yupResolver(schema),
@@ -96,26 +104,39 @@ export default function CocktailsNewPage() {
           className="mb-4 w-full"
           onSubmit={handleSubmit(onSubmitValid, onSubmitInvalid)}
         >
-          <div className="mb-2">
-            <label className="mb-1 block text-sm" htmlFor="name">
-              Cocktail name
-            </label>
-            <input
-              className={clsx(
-                "focus:shadow-outline mb-1 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none",
-                errors.name && "border-red-500",
-              )}
-              {...register("name", { required: true })}
-            />
-            {errors.name && (
-              <p className="mb-1 text-sm text-red-500">{errors.name.message}</p>
-            )}
-          </div>
-          <div className="mb-6">
-            <h4>Ingredients</h4>
+          <FieldSet className="mb-3" legend="Cocktail details">
+            <FieldWrapper
+              inputId="name"
+              label="Cocktail name"
+              invalid={!!errors.name}
+              errorMessage={errors.name?.message}
+            >
+              <input
+                id="name"
+                type="text"
+                data-error={!!errors.name}
+                {...register("name", { required: true })}
+              />
+            </FieldWrapper>
+
+            <FieldWrapper
+              inputId="description"
+              label="Cocktail description (optional)"
+              invalid={!!errors.description}
+              errorMessage={errors.description?.message}
+            >
+              <textarea
+                id="description"
+                data-error={!!errors.description}
+                {...register("description", { required: true })}
+              />
+            </FieldWrapper>
+          </FieldSet>
+
+          <FieldSet className="mb-6" legend="Ingredients">
             <ul className="list-disc pl-4">
               {fields.map((field, index) => (
-                <li key={index} className="mb-2">
+                <li key={field.id} className="mb-2">
                   <div
                     className={clsx(
                       "rounded px-2 py-1",
@@ -167,84 +188,67 @@ export default function CocktailsNewPage() {
                     </div>
                     {index === editingIngredientIndex && (
                       <div>
-                        <div className="mb-2">
-                          <label
-                            className="mb-2 block text-sm"
-                            htmlFor={`ingredients.${index}.name`}
-                          >
-                            Ingredient name
-                          </label>
+                        <FieldWrapper
+                          inputId={`ingredients.${index}.name`}
+                          label="Ingredient name"
+                          invalid={!!errors.ingredients?.[index]?.name}
+                          errorMessage={
+                            errors.ingredients?.[index]?.name?.message
+                          }
+                        >
                           <input
-                            className={clsx(
-                              "focus:shadow-outline mb-1 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none",
-                              errors.ingredients?.[index]?.name &&
-                                "border-red-500",
-                            )}
+                            id={`ingredients.${index}.name`}
                             type="text"
-                            placeholder="Ingredient"
+                            data-error={!!errors.ingredients?.[index]?.name}
                             {...register(`ingredients.${index}.name` as const)}
                           />
-                          {errors.ingredients?.[index]?.name && (
-                            <p className="mb-1 text-sm text-red-500">
-                              {errors.ingredients?.[index]?.name.message}
-                            </p>
-                          )}
-                        </div>
+                        </FieldWrapper>
 
-                        <label
-                          className="mb-2 block text-sm"
-                          htmlFor={`ingredients.${index}.amount`}
-                        >
-                          Ingredient amount
-                        </label>
                         <div className="flex justify-stretch">
-                          <div className="mb-2 flex-1">
+                          <FieldWrapper
+                            className="flex-1"
+                            inputId={`ingredients.${index}.amount`}
+                            label="Ingredient amount"
+                            invalid={!!errors.ingredients?.[index]?.amount}
+                            errorMessage={
+                              errors.ingredients?.[index]?.amount?.message
+                            }
+                          >
                             <input
-                              className={clsx(
-                                "focus:shadow-outline mb-1 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none",
-                                errors.ingredients?.[index]?.amount &&
-                                  "border-red-500",
-                              )}
+                              id={`ingredients.${index}.amount`}
                               type="text"
-                              placeholder="Quantity"
+                              data-error={!!errors.ingredients?.[index]?.amount}
                               {...register(
                                 `ingredients.${index}.amount` as const,
                               )}
                             />
-                            {errors.ingredients?.[index]?.amount && (
-                              <p className="mb-1 text-sm text-red-500">
-                                {errors.ingredients?.[index]?.amount.message}
-                              </p>
-                            )}
-                          </div>
+                          </FieldWrapper>
 
-                          <div className="mb-2 ml-3 flex-1">
+                          <FieldWrapper
+                            className="ml-3 flex-1"
+                            inputId={`ingredients.${index}.amountUnit`}
+                            label="Unit"
+                            invalid={!!errors.ingredients?.[index]?.amountUnit}
+                            errorMessage={
+                              errors.ingredients?.[index]?.amountUnit?.message
+                            }
+                          >
                             <select
-                              className={clsx(
-                                "focus:shadow-outline mb-1 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none",
-                                errors.ingredients?.[index]?.amountUnit &&
-                                  "border-red-500",
-                              )}
+                              data-error={
+                                errors.ingredients?.[index]?.amountUnit
+                              }
                               {...register(
                                 `ingredients.${index}.amountUnit` as const,
                               )}
                             >
-                              <option value="">Unit</option>
+                              <option value="">Select...</option>
                               {amountUnitOptions.map((unit) => (
                                 <option key={unit} value={unit}>
                                   {unit}
                                 </option>
                               ))}
                             </select>
-                            {errors.ingredients?.[index]?.amountUnit && (
-                              <p className="mb-1 text-sm text-red-500">
-                                {
-                                  errors.ingredients?.[index]?.amountUnit
-                                    .message
-                                }
-                              </p>
-                            )}
-                          </div>
+                          </FieldWrapper>
                         </div>
                       </div>
                     )}
@@ -253,12 +257,12 @@ export default function CocktailsNewPage() {
               ))}
             </ul>
             <button
-              className="pointer rounded p-1 underline hover:outline"
+              className="rounded p-1 underline hover:outline"
               onClick={handleAddIngredientClick}
             >
               Add ingredient
             </button>
-          </div>
+          </FieldSet>
 
           <div className="flex items-center justify-between">
             <button

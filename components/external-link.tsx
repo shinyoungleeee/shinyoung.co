@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
-
-import UpRightArrow from "./icons/up-right-arrow";
+import { ArrowUpRight } from "lucide-react";
 
 interface ExternalLinkProps {
   href: string;
@@ -15,8 +14,8 @@ export default function ExternalLink({ href, children }: ExternalLinkProps) {
       target="_blank"
       href={href}
     >
-      <UpRightArrow />
-      <p className="ml-2 h-7">{children}</p>
+      <ArrowUpRight className="h-5 w-5" />
+      <p className="ml-2">{children}</p>
     </a>
   );
 }

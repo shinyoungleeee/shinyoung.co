@@ -124,6 +124,8 @@ model Cocktail {
   id            Int                      @id @default(autoincrement())
   name          String
   ingredients   IngredientsOnCocktails[]
+  description   String?                  @db.Text
+  image         String?                  @db.Text
   variationOfId Int?
   variationOf   Cocktail?                @relation("CocktailVariations", fields: [variationOfId], references: [id])
   variations    Cocktail[]               @relation("CocktailVariations")
