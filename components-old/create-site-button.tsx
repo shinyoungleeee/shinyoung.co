@@ -1,6 +1,6 @@
 "use client";
 
-import { useModal } from "@/components/modal/provider";
+import { useModal } from "@/components-old/modal/provider";
 import { ReactNode } from "react";
 
 export default function CreateSiteButton({

@@ -2,7 +2,7 @@
 
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
-import { ModalProvider } from "@/components/modal/provider";
+import { ModalProvider } from "@/components-old/modal/provider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
