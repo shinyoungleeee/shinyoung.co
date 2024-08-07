@@ -121,23 +121,38 @@ model Example {
 }
 
 model Cocktail {
-  id          Int                      @id @default(autoincrement())
-  name        String
-  ingredients IngredientsOnCocktails[]
+  id            Int                      @id @default(autoincrement())
+  name          String
+  ingredients   IngredientsOnCocktails[]
+  variationOfId Int?
+  variationOf   Cocktail?                @relation("CocktailVariations", fields: [variationOfId], references: [id])
+  variations    Cocktail[]               @relation("CocktailVariations")
 }
 
 model Ingredient {
   id        Int                      @id @default(autoincrement())
   name      String
+  inStock   Boolean
+  type      IngredientType?
   cocktails IngredientsOnCocktails[]
 }
 
+enum IngredientType {
+  Alcohol
+  Garnish
+}
+
 model IngredientsOnCocktails {
-  cocktail     Cocktail   @relation(fields: [cocktailId], references: [id])
   cocktailId   Int
-  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  cocktail     Cocktail   @relation(fields: [cocktailId], references: [id])
   ingredientId Int
-  quantity     String
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  amount       Float
+  amountUnit   AmountUnit
 
   @@id([cocktailId, ingredientId])
+}
+
+enum AmountUnit {
+  Oz @map("oz")
 }
