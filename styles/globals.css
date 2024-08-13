@@ -117,9 +117,34 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
   [type="tel"],
   [type="time"],
   [type="week"],
+  [type="radio"],
+  [type="checkbox"],
   [multiple],
   textarea,
   select {
-    @apply mb-1 w-full appearance-none rounded border px-3 py-2 align-top leading-tight text-gray-700 shadow data-[error=true]:border-red-500;
+    @apply data-[error=true]:border-red-500;
+  }
+
+  [type="text"],
+  input:where(:not([type])),
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    @apply mb-1 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow;
+  }
+
+  textarea {
+    @apply align-top;
   }
 }

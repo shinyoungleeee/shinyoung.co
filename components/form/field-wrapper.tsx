@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 import { FC, HTMLProps, ReactNode } from "react";
 
 type FieldWrapperProps = HTMLProps<HTMLDivElement> & {
@@ -18,7 +18,7 @@ export const FieldWrapper: FC<FieldWrapperProps> = ({
   className,
   ...rest
 }) => (
-  <div className={clsx("mb-2", className)} {...rest}>
+  <div className={cn("mb-2", className)} {...rest}>
     {label && (
       <label className="mb-1 block text-sm" htmlFor={inputId}>
         {label}

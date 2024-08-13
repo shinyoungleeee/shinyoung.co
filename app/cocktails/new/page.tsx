@@ -2,9 +2,9 @@
 
 import { FieldWrapper } from "@/components/form/field-wrapper";
 import { FieldSet } from "@/components/form/fieldset";
+import { amountUnitOptions, emptyIngredient } from "@/lib/form-data";
+import { cn } from "@/lib/utils";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AmountUnit } from "@prisma/client";
-import clsx from "clsx";
 import { Check, Pencil, Trash2 } from "lucide-react";
 import { MouseEventHandler, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -32,10 +32,6 @@ const schema = yup
   })
   .required();
 
-const amountUnitOptions = [AmountUnit.Oz];
-
-const emptyIngredient = { name: "", amount: 0, amountUnit: "" };
-
 export default function CocktailsNewPage() {
   const {
     control,
@@ -55,6 +51,9 @@ export default function CocktailsNewPage() {
     control,
     name: "ingredients",
   });
+  const [editingIngredientIndex, setEditingIngredientIndex] = useState<
+    number | null
+  >(0);
 
   const handleAddIngredientClick: MouseEventHandler<HTMLButtonElement> = (
     e,
@@ -64,9 +63,6 @@ export default function CocktailsNewPage() {
     append(emptyIngredient);
   };
 
-  const [editingIngredientIndex, setEditingIngredientIndex] = useState<
-    number | null
-  >(0);
   const handleEditIngredientClick =
     (ingredientIndex: number): MouseEventHandler<HTMLButtonElement> =>
     (e) => {
@@ -104,7 +100,7 @@ export default function CocktailsNewPage() {
           className="mb-4 w-full"
           onSubmit={handleSubmit(onSubmitValid, onSubmitInvalid)}
         >
-          <FieldSet className="mb-3" legend="Cocktail details">
+          <FieldSet legend="Cocktail details">
             <FieldWrapper
               inputId="name"
               label="Cocktail name"
@@ -115,7 +111,7 @@ export default function CocktailsNewPage() {
                 id="name"
                 type="text"
                 data-error={!!errors.name}
-                {...register("name", { required: true })}
+                {...register("name")}
               />
             </FieldWrapper>
 
@@ -128,7 +124,7 @@ export default function CocktailsNewPage() {
               <textarea
                 id="description"
                 data-error={!!errors.description}
-                {...register("description", { required: true })}
+                {...register("description")}
               />
             </FieldWrapper>
           </FieldSet>
@@ -138,7 +134,7 @@ export default function CocktailsNewPage() {
               {fields.map((field, index) => (
                 <li key={field.id} className="mb-2">
                   <div
-                    className={clsx(
+                    className={cn(
                       "rounded px-2 py-1",
                       index === editingIngredientIndex && "bg-gray-100",
                       errors.ingredients?.[index] && "bg-red-100",
@@ -146,7 +142,7 @@ export default function CocktailsNewPage() {
                   >
                     <div className="flex items-start justify-between">
                       <span
-                        className={clsx(
+                        className={cn(
                           index === editingIngredientIndex && "text-gray-500",
                         )}
                       >
@@ -220,6 +216,7 @@ export default function CocktailsNewPage() {
                               data-error={!!errors.ingredients?.[index]?.amount}
                               {...register(
                                 `ingredients.${index}.amount` as const,
+                                { valueAsNumber: true },
                               )}
                             />
                           </FieldWrapper>

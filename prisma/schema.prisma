@@ -134,14 +134,15 @@ model Cocktail {
 model Ingredient {
   id        Int                      @id @default(autoincrement())
   name      String
-  inStock   Boolean
   type      IngredientType?
+  inStock   Boolean
   cocktails IngredientsOnCocktails[]
 }
 
 enum IngredientType {
   Alcohol
   Garnish
+  Other
 }
 
 model IngredientsOnCocktails {
