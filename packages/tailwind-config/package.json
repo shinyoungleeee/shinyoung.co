@@ -3,10 +3,10 @@
   "license": "MIT",
   "version": "0.0.0",
   "private": true,
-  "devDependencies": {
+  "dependencies": {
     "tailwindcss-animate": "^1.0.7"
   },
-  "peerDependencies": {
-    "tailwindcss": ">=3.0.0"
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
   }
 }

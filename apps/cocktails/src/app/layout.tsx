@@ -1,8 +1,8 @@
+import { SiteFooter } from '@repo/ui/site-footer'
+import { SiteHeader } from '@repo/ui/site-header'
+import { ThemeProvider } from 'next-themes'
 import { Inter, Lora } from 'next/font/google'
 import { type ReactNode } from 'react'
-import { ThemeProvider } from 'next-themes'
-import { SiteFooter } from '@/components/site-footer'
-import { SiteHeader } from '@/components/site-header'
 import '../styles/global.css'
 
 const inter = Inter({

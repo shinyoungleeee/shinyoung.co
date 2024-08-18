@@ -3,7 +3,7 @@
 import { Martini } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
+import { cn } from './utils'
 
 export function MainNav(): JSX.Element {
   const pathname = usePathname()

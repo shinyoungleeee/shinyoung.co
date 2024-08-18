@@ -3,9 +3,9 @@
 import { Martini, Menu } from 'lucide-react'
 import { useState } from 'react'
 import { MobileLink } from './mobile-link'
-import { Button } from '@/components/button'
-import { ScrollArea } from '@/components/scroll-area'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/sheet'
+import { Button } from './button'
+import { ScrollArea } from './scroll-area'
+import { Sheet, SheetContent, SheetTrigger } from './sheet'
 
 export function MobileNav(): JSX.Element {
   const [open, setOpen] = useState(false)

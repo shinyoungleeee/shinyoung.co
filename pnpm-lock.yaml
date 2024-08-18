@@ -115,36 +115,12 @@ importers:
 
   apps/cocktails:
     dependencies:
-      '@radix-ui/react-dialog':
-        specifier: ^1.1.1
-        version: 1.1.1(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@radix-ui/react-dropdown-menu':
-        specifier: ^2.1.1
-        version: 2.1.1(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@radix-ui/react-popover':
-        specifier: ^1.1.1
-        version: 1.1.1(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@radix-ui/react-scroll-area':
-        specifier: ^1.1.0
-        version: 1.1.0(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@radix-ui/react-slot':
-        specifier: ^1.1.0
-        version: 1.1.0(@types/react@18.2.62)(react@18.2.0)
       '@repo/logger':
         specifier: workspace:*
         version: link:../../packages/logger
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      class-variance-authority:
-        specifier: ^0.7.0
-        version: 0.7.0
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
-      lucide-react:
-        specifier: ^0.292.0
-        version: 0.292.0(react@18.2.0)
       next:
         specifier: ^14.1.1
         version: 14.2.5(@babel/core@7.24.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -157,12 +133,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      tailwind-merge:
-        specifier: ^2.0.0
-        version: 2.5.2
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.10)
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^14.1.1
@@ -519,17 +489,48 @@ importers:
 
   packages/tailwind-config:
     dependencies:
-      tailwindcss:
-        specifier: '>=3.0.0'
-        version: 3.4.10
-    devDependencies:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.10)
+    devDependencies:
+      tailwindcss:
+        specifier: ^3.3.5
+        version: 3.4.10
 
   packages/typescript-config: {}
 
   packages/ui:
+    dependencies:
+      '@radix-ui/react-dialog':
+        specifier: ^1.1.1
+        version: 1.1.1(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@radix-ui/react-dropdown-menu':
+        specifier: ^2.1.1
+        version: 2.1.1(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@radix-ui/react-popover':
+        specifier: ^1.1.1
+        version: 1.1.1(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@radix-ui/react-scroll-area':
+        specifier: ^1.1.0
+        version: 1.1.0(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@radix-ui/react-slot':
+        specifier: ^1.1.0
+        version: 1.1.0(@types/react@18.2.62)(react@18.2.0)
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      lucide-react:
+        specifier: ^0.292.0
+        version: 0.292.0(react@18.2.0)
+      next-themes:
+        specifier: ^0.3.0
+        version: 0.3.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      tailwind-merge:
+        specifier: ^2.0.0
+        version: 2.5.2
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -555,15 +556,15 @@ importers:
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.11.24)
+      next:
+        specifier: ^14.1.1
+        version: 14.2.5(@babel/core@7.24.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      tsup:
-        specifier: ^8.0.2
-        version: 8.0.2(postcss@8.4.41)(typescript@5.3.3)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
