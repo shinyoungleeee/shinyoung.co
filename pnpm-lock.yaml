@@ -32,10 +32,10 @@ importers:
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
-        version: link:../../packages/config-eslint
+        version: link:../../packages/eslint-config
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/config-typescript
+        version: link:../../packages/typescript-config
       '@types/react':
         specifier: ^18.2.62
         version: 18.2.62
@@ -72,13 +72,13 @@ importers:
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
-        version: link:../../packages/config-eslint
+        version: link:../../packages/eslint-config
       '@repo/jest-presets':
         specifier: workspace:*
         version: link:../../packages/jest-presets
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/config-typescript
+        version: link:../../packages/typescript-config
       '@types/body-parser':
         specifier: ^1.19.5
         version: 1.19.5
@@ -169,10 +169,13 @@ importers:
         version: 14.2.5
       '@repo/eslint-config':
         specifier: workspace:*
-        version: link:../../packages/config-eslint
+        version: link:../../packages/eslint-config
+      '@repo/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/config-typescript
+        version: link:../../packages/typescript-config
       '@types/node':
         specifier: ^20.11.24
         version: 20.11.24
@@ -442,10 +445,10 @@ importers:
         version: 14.1.1
       '@repo/eslint-config':
         specifier: workspace:*
-        version: link:../../packages/config-eslint
+        version: link:../../packages/eslint-config
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/config-typescript
+        version: link:../../packages/typescript-config
       '@types/node':
         specifier: ^20.11.24
         version: 20.11.24
@@ -459,7 +462,7 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  packages/config-eslint:
+  packages/eslint-config:
     devDependencies:
       '@vercel/style-guide':
         specifier: ^5.2.0
@@ -477,8 +480,6 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0(eslint@8.57.0)(typescript@5.3.3)
 
-  packages/config-typescript: {}
-
   packages/jest-presets:
     dependencies:
       ts-jest:
@@ -493,13 +494,13 @@ importers:
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
-        version: link:../config-eslint
+        version: link:../eslint-config
       '@repo/jest-presets':
         specifier: workspace:*
         version: link:../jest-presets
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../config-typescript
+        version: link:../typescript-config
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
@@ -516,17 +517,29 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  packages/tailwind-config:
+    dependencies:
+      tailwindcss:
+        specifier: '>=3.0.0'
+        version: 3.4.10
+    devDependencies:
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.10)
+
+  packages/typescript-config: {}
+
   packages/ui:
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
-        version: link:../config-eslint
+        version: link:../eslint-config
       '@repo/jest-presets':
         specifier: workspace:*
         version: link:../jest-presets
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../config-typescript
+        version: link:../typescript-config
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
@@ -8265,7 +8278,7 @@ snapshots:
 
   '@babel/helpers@7.24.0':
     dependencies:
-      '@babel/template': 7.24.0
+      '@babel/template': 7.24.7
       '@babel/traverse': 7.24.7
       '@babel/types': 7.24.7
     transitivePeerDependencies:
@@ -12623,7 +12636,7 @@ snapshots:
 
   eslint-plugin-unicorn@48.0.1(eslint@8.57.0):
     dependencies:
-      '@babel/helper-validator-identifier': 7.22.20
+      '@babel/helper-validator-identifier': 7.24.7
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
       ci-info: 3.9.0
       clean-regexp: 1.0.0
