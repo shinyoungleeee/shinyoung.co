@@ -3,11 +3,18 @@
 import { Menu } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { useMetadata } from '../providers/metadata-provider'
+import { projectLinks } from '../lib/constants'
 import { Button } from './button'
-import { useMetadata } from './metadata-provider'
 import { MobileLink } from './mobile-link'
 import { ScrollArea } from './scroll-area'
-import { Sheet, SheetContent, SheetTrigger } from './sheet'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from './sheet'
 
 export function MobileNav(): JSX.Element {
   const [open, setOpen] = useState(false)
@@ -26,6 +33,11 @@ export function MobileNav(): JSX.Element {
         </Button>
       </SheetTrigger>
       <SheetContent className="pr-0" side="left">
+        <SheetTitle className="hidden">Mobile navigation menu</SheetTitle>
+        <SheetDescription className="hidden">
+          Opens when you click the menu icon.
+        </SheetDescription>
+
         <MobileLink
           className="flex items-center space-x-2"
           href="/"
@@ -52,27 +64,16 @@ export function MobileNav(): JSX.Element {
           <div className="flex flex-col space-y-2">
             <div className="flex flex-col space-y-3 pt-6">
               <h4 className="font-medium">Projects</h4>
-              <MobileLink
-                className="text-muted-foreground"
-                href="https://shinyoung.co"
-                onOpenChange={setOpen}
-              >
-                My portfolio
-              </MobileLink>
-              <MobileLink
-                className="text-muted-foreground"
-                href="https://cocktails.shinyoung.co"
-                onOpenChange={setOpen}
-              >
-                Lee family cocktail menu
-              </MobileLink>
-              <MobileLink
-                className="text-muted-foreground"
-                href="https://cocktails-api.shinyoung.co/docs"
-                onOpenChange={setOpen}
-              >
-                Cocktails API
-              </MobileLink>
+              {projectLinks.map(({ href, text }) => (
+                <MobileLink
+                  className="text-muted-foreground"
+                  href={href}
+                  key={href}
+                  onOpenChange={setOpen}
+                >
+                  {text}
+                </MobileLink>
+              ))}
             </div>
           </div>
         </ScrollArea>

@@ -1,5 +1,7 @@
 'use client'
 
+import { MoonStar, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import { Button } from './button'
 import {
   DropdownMenu,
@@ -7,8 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './dropdown-menu'
-import { MoonStar, Sun } from 'lucide-react'
-import { useTheme } from 'next-themes'
 
 export function LightDarkToggle(): JSX.Element {
   const { setTheme } = useTheme()

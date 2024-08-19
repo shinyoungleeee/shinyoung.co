@@ -3,7 +3,7 @@
 import type { LinkProps } from 'next/link'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 interface MobileLinkProps extends LinkProps {
   onOpenChange?: (open: boolean) => void

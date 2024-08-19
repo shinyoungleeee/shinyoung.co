@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useMetadata } from './metadata-provider'
-import { cn } from './utils'
+import { useMetadata } from '../providers/metadata-provider'
+import { cn } from '../lib/utils'
 
 export function MainNav(): JSX.Element {
   const pathname = usePathname()
