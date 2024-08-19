@@ -3,12 +3,11 @@
 import type { LinkProps } from 'next/link'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import * as React from 'react'
-import { cn } from './utils'
+import { ReactNode } from 'react'
 
 interface MobileLinkProps extends LinkProps {
   onOpenChange?: (open: boolean) => void
-  children: React.ReactNode
+  children: ReactNode
   className?: string
 }
 
@@ -20,9 +19,10 @@ export function MobileLink({
   ...props
 }: MobileLinkProps): JSX.Element {
   const router = useRouter()
+
   return (
     <Link
-      className={cn(className)}
+      className={className}
       href={href}
       onClick={() => {
         router.push(href.toString())

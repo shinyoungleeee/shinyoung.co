@@ -15,7 +15,9 @@
     "./scroll-area": "./src/scroll-area.tsx",
     "./sheet": "./src/sheet.tsx",
     "./site-footer": "./src/site-footer.tsx",
-    "./site-header": "./src/site-header.tsx"
+    "./site-header": "./src/site-header.tsx",
+    "./metadata-provider": "./src/metadata-provider.tsx",
+    "./theme-provider": "./src/theme-provider.tsx"
   },
   "scripts": {
     "clean": "rm -rf dist",
@@ -34,7 +36,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.292.0",
+    "lucide-react": "^0.428.0",
     "next-themes": "^0.3.0",
     "tailwind-merge": "^2.0.0"
   },
@@ -53,7 +55,7 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "react": ">18",
-    "next": ">14"
+    "next": ">14",
+    "react": ">18"
   }
 }

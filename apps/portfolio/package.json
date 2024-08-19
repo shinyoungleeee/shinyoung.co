@@ -1,11 +1,11 @@
 {
-  "name": "cocktails",
+  "name": "portfolio",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "build": "next build",
     "clean": "rm -rf .next",
-    "dev": "next dev -p 3003",
+    "dev": "next dev -p 3004",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "start": "next start"

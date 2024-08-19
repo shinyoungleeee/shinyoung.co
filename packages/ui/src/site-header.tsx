@@ -1,9 +1,15 @@
+'use client'
+
 import { Github, Linkedin } from 'lucide-react'
+import Link from 'next/link'
 import { LightDarkToggle } from './light-dark-toggle'
 import { MainNav } from './main-nav'
+import { useMetadata } from './metadata-provider'
 import { MobileNav } from './mobile-nav'
 
 export function SiteHeader(): JSX.Element {
+  const { githubTreePath } = useMetadata()
+
   return (
     <header className="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full backdrop-blur">
       <div className="container flex h-14 max-w-screen-2xl items-center">
@@ -11,8 +17,8 @@ export function SiteHeader(): JSX.Element {
         <MobileNav />
         <div className="flex flex-1 items-center justify-end space-x-2">
           <nav className="flex items-center">
-            <a
-              href="https://github.com/shinyoungleeee/shinyoung.co/tree/main/apps/cocktails"
+            <Link
+              href={`https://github.com/shinyoungleeee/shinyoung.co${githubTreePath || ''}`}
               rel="noreferrer"
               target="_blank"
             >
@@ -20,8 +26,8 @@ export function SiteHeader(): JSX.Element {
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </div>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.linkedin.com/in/shinyoung-lee/"
               rel="noreferrer"
               target="_blank"
@@ -30,7 +36,7 @@ export function SiteHeader(): JSX.Element {
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </div>
-            </a>
+            </Link>
             <LightDarkToggle />
           </nav>
         </div>
