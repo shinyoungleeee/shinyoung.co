@@ -57,14 +57,21 @@ export function MobileNav(): JSX.Element {
                 href="https://shinyoung.co"
                 onOpenChange={setOpen}
               >
-                My Portfolio
+                My portfolio
               </MobileLink>
               <MobileLink
                 className="text-muted-foreground"
                 href="https://cocktails.shinyoung.co"
                 onOpenChange={setOpen}
               >
-                Lee Family Cocktail Menu
+                Lee family cocktail menu
+              </MobileLink>
+              <MobileLink
+                className="text-muted-foreground"
+                href="https://cocktails-api.shinyoung.co/docs"
+                onOpenChange={setOpen}
+              >
+                Cocktails API
               </MobileLink>
             </div>
           </div>
