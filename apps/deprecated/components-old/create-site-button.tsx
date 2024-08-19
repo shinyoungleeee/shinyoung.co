@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { useModal } from "./modal/provider";
-import { ReactNode } from "react";
+import { useModal } from './modal/provider'
+import { ReactNode } from 'react'
 
 export default function CreateSiteButton({
   children,
 }: {
-  children: ReactNode;
+  children: ReactNode
 }) {
-  const modal = useModal();
+  const modal = useModal()
   return (
     <button
       onClick={() => modal?.show(children)}
@@ -16,5 +16,5 @@ export default function CreateSiteButton({
     >
       Create New Site
     </button>
-  );
+  )
 }

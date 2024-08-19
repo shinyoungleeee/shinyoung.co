@@ -1,12 +1,12 @@
-import Form from "../../../../components-old/form";
-import { getSession } from "../../../../lib/auth";
-import { redirect } from "next/navigation";
-import { editUser } from "../../../../lib/actions";
+import Form from '../../../../components-old/form'
+import { getSession } from '../../../../lib/auth'
+import { redirect } from 'next/navigation'
+import { editUser } from '../../../../lib/actions'
 
 export default async function SettingsPage() {
-  const session = await getSession();
+  const session = await getSession()
   if (!session) {
-    redirect("/login");
+    redirect('/login')
   }
   return (
     <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
@@ -19,10 +19,10 @@ export default async function SettingsPage() {
           description="Your name on this app."
           helpText="Please use 32 characters maximum."
           inputAttrs={{
-            name: "name",
-            type: "text",
+            name: 'name',
+            type: 'text',
             defaultValue: session.user.name!,
-            placeholder: "Brendon Urie",
+            placeholder: 'Brendon Urie',
             maxLength: 32,
           }}
           handleSubmit={editUser}
@@ -32,14 +32,14 @@ export default async function SettingsPage() {
           description="Your email on this app."
           helpText="Please enter a valid email."
           inputAttrs={{
-            name: "email",
-            type: "email",
+            name: 'email',
+            type: 'email',
             defaultValue: session.user.email!,
-            placeholder: "panic@thedis.co",
+            placeholder: 'panic@thedis.co',
           }}
           handleSubmit={editUser}
         />
       </div>
     </div>
-  );
+  )
 }

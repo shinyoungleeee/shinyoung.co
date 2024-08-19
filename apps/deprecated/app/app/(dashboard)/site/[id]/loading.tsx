@@ -1,6 +1,6 @@
 // a bunch of loading divs
 
-import PlaceholderCard from "../../../../../components-old/placeholder-card";
+import PlaceholderCard from '../../../../../components-old/placeholder-card'
 
 export default function Loading() {
   return (
@@ -12,5 +12,5 @@ export default function Loading() {
         ))}
       </div>
     </>
-  );
+  )
 }

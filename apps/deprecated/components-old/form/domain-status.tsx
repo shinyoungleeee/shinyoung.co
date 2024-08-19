@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
-import LoadingSpinner from "./loading-spinner";
-import { useDomainStatus } from "./use-domain-status";
+import { AlertCircle, CheckCircle2, XCircle } from 'lucide-react'
+import LoadingSpinner from './loading-spinner'
+import { useDomainStatus } from './use-domain-status'
 
 export default function DomainStatus({ domain }: { domain: string }) {
-  const { status, loading } = useDomainStatus({ domain });
+  const { status, loading } = useDomainStatus({ domain })
 
   return loading ? (
     <LoadingSpinner />
-  ) : status === "Valid Configuration" ? (
+  ) : status === 'Valid Configuration' ? (
     <CheckCircle2
       fill="#2563EB"
       stroke="currentColor"
       className="text-white dark:text-black"
     />
-  ) : status === "Pending Verification" ? (
+  ) : status === 'Pending Verification' ? (
     <AlertCircle
       fill="#FBBF24"
       stroke="currentColor"
@@ -27,5 +27,5 @@ export default function DomainStatus({ domain }: { domain: string }) {
       stroke="currentColor"
       className="text-white dark:text-black"
     />
-  );
+  )
 }

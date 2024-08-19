@@ -1,22 +1,22 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ReactNode } from "react";
-import CTA from "../../components-old/cta";
-import ReportAbuse from "../../components-old/report-abuse";
-import { notFound, redirect } from "next/navigation";
-import { getSiteData } from "../../lib/fetchers";
-import { fontMapper } from "../../styles/fonts";
-import { Metadata } from "next";
+import Image from 'next/image'
+import Link from 'next/link'
+import { ReactNode } from 'react'
+import CTA from '../../components-old/cta'
+import ReportAbuse from '../../components-old/report-abuse'
+import { notFound, redirect } from 'next/navigation'
+import { getSiteData } from '../../lib/fetchers'
+import { fontMapper } from '../../styles/fonts'
+import { Metadata } from 'next'
 
 export async function generateMetadata({
   params,
 }: {
-  params: { domain: string };
+  params: { domain: string }
 }): Promise<Metadata | null> {
-  const domain = decodeURIComponent(params.domain);
-  const data = await getSiteData(domain);
+  const domain = decodeURIComponent(params.domain)
+  const data = await getSiteData(domain)
   if (!data) {
-    return null;
+    return null
   }
   const {
     name: title,
@@ -24,11 +24,11 @@ export async function generateMetadata({
     image,
     logo,
   } = data as {
-    name: string;
-    description: string;
-    image: string;
-    logo: string;
-  };
+    name: string
+    description: string
+    image: string
+    logo: string
+  }
 
   return {
     title,
@@ -39,11 +39,11 @@ export async function generateMetadata({
       images: [image],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title,
       description,
       images: [image],
-      creator: "@vercel",
+      creator: '@vercel',
     },
     icons: [logo],
     metadataBase: new URL(`https://${domain}`),
@@ -54,30 +54,30 @@ export async function generateMetadata({
     //       canonical: `https://${data.customDomain}`,
     //     },
     //   }),
-  };
+  }
 }
 
 export default async function SiteLayout({
   params,
   children,
 }: {
-  params: { domain: string };
-  children: ReactNode;
+  params: { domain: string }
+  children: ReactNode
 }) {
-  const domain = decodeURIComponent(params.domain);
-  const data = await getSiteData(domain);
+  const domain = decodeURIComponent(params.domain)
+  const data = await getSiteData(domain)
 
   if (!data) {
-    notFound();
+    notFound()
   }
 
   // Optional: Redirect to custom domain if it exists
   if (
     domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) &&
     data.customDomain &&
-    process.env.REDIRECT_TO_CUSTOM_DOMAIN_IF_EXISTS === "true"
+    process.env.REDIRECT_TO_CUSTOM_DOMAIN_IF_EXISTS === 'true'
   ) {
-    return redirect(`https://${data.customDomain}`);
+    return redirect(`https://${data.customDomain}`)
   }
 
   return (
@@ -87,13 +87,13 @@ export default async function SiteLayout({
           <Link href="/" className="flex items-center justify-center">
             <div className="inline-block h-8 w-8 overflow-hidden rounded-full align-middle">
               <Image
-                alt={data.name || ""}
+                alt={data.name || ''}
                 height={40}
-                src={data.logo || ""}
+                src={data.logo || ''}
                 width={40}
               />
             </div>
-            <span className="ml-3 inline-block truncate font-title font-medium">
+            <span className="font-title ml-3 inline-block truncate font-medium">
               {data.name}
             </span>
           </Link>
@@ -109,5 +109,5 @@ export default async function SiteLayout({
         <ReportAbuse />
       )}
     </div>
-  );
+  )
 }

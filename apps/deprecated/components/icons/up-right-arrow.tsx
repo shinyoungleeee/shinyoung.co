@@ -13,5 +13,5 @@ export default function UpRightArrow({ className }: { className?: string }) {
         fill="currentColor"
       ></path>
     </svg>
-  );
+  )
 }

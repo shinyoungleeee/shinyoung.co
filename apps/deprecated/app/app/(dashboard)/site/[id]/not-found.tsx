@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function NotFoundSite() {
   return (
@@ -22,5 +22,5 @@ export default function NotFoundSite() {
         Site does not exist, or you do not have permission to view it
       </p>
     </div>
-  );
+  )
 }

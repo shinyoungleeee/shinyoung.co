@@ -1,6 +1,6 @@
-import Footer from "../../components/footer";
-import Nav from "../../components/nav";
-import Link from "next/link";
+import Footer from '../../components/footer'
+import Nav from '../../components/nav'
+import Link from 'next/link'
 
 export default function HomePage() {
   return (
@@ -55,5 +55,5 @@ export default function HomePage() {
         <Footer />
       </div>
     </main>
-  );
+  )
 }

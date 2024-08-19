@@ -1,32 +1,32 @@
-import { unstable_cache } from "next/cache";
-import prisma from "./prisma";
-import { serialize } from "next-mdx-remote/serialize";
-import { replaceExamples, replaceTweets } from "./remark-plugins";
+import { unstable_cache } from 'next/cache'
+import prisma from './prisma'
+import { serialize } from 'next-mdx-remote/serialize'
+import { replaceExamples, replaceTweets } from './remark-plugins'
 
 export async function getSiteData(domain: string) {
   const subdomain = domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`)
-    ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, "")
-    : null;
+    ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, '')
+    : null
 
   return await unstable_cache(
     async () => {
       return prisma.site.findUnique({
         where: subdomain ? { subdomain } : { customDomain: domain },
         include: { user: true },
-      });
+      })
     },
     [`${domain}-metadata`],
     {
       revalidate: 900,
       tags: [`${domain}-metadata`],
     }
-  )();
+  )()
 }
 
 export async function getPostsForSite(domain: string) {
   const subdomain = domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`)
-    ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, "")
-    : null;
+    ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, '')
+    : null
 
   return await unstable_cache(
     async () => {
@@ -45,23 +45,23 @@ export async function getPostsForSite(domain: string) {
         },
         orderBy: [
           {
-            createdAt: "desc",
+            createdAt: 'desc',
           },
         ],
-      });
+      })
     },
     [`${domain}-posts`],
     {
       revalidate: 900,
       tags: [`${domain}-posts`],
     }
-  )();
+  )()
 }
 
 export async function getPostData(domain: string, slug: string) {
   const subdomain = domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`)
-    ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, "")
-    : null;
+    ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, '')
+    : null
 
   return await unstable_cache(
     async () => {
@@ -78,9 +78,9 @@ export async function getPostData(domain: string, slug: string) {
             },
           },
         },
-      });
+      })
 
-      if (!data) return null;
+      if (!data) return null
 
       const [mdxSource, adjacentPosts] = await Promise.all([
         getMdxSource(data.content!),
@@ -101,33 +101,33 @@ export async function getPostData(domain: string, slug: string) {
             imageBlurhash: true,
           },
         }),
-      ]);
+      ])
 
       return {
         ...data,
         mdxSource,
         adjacentPosts,
-      };
+      }
     },
     [`${domain}-${slug}`],
     {
       revalidate: 900, // 15 minutes
       tags: [`${domain}-${slug}`],
     }
-  )();
+  )()
 }
 
 async function getMdxSource(postContents: string) {
   // transforms links like <link> to [link](link) as MDX doesn't support <link> syntax
   // https://mdxjs.com/docs/what-is-mdx/#markdown
   const content =
-    postContents?.replaceAll(/<(https?:\/\/\S+)>/g, "[$1]($1)") ?? "";
+    postContents?.replaceAll(/<(https?:\/\/\S+)>/g, '[$1]($1)') ?? ''
   // Serialize the content string into MDX
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [replaceTweets, () => replaceExamples(prisma)],
     },
-  });
+  })
 
-  return mdxSource;
+  return mdxSource
 }

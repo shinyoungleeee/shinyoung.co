@@ -1,36 +1,36 @@
-"use client";
+'use client'
 
-import { FieldWrapper } from "../../../components/form/field-wrapper";
-import { FieldSet } from "../../../components/form/fieldset";
-import { amountUnitOptions, emptyIngredient } from "../../../lib/form-data";
-import { cn } from "../../../lib/utils";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Check, Pencil, Trash2 } from "lucide-react";
-import { MouseEventHandler, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import * as yup from "yup";
+import { FieldWrapper } from '../../../components/form/field-wrapper'
+import { FieldSet } from '../../../components/form/fieldset'
+import { amountUnitOptions, emptyIngredient } from '../../../lib/form-data'
+import { cn } from '../../../lib/utils'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Check, Pencil, Trash2 } from 'lucide-react'
+import { MouseEventHandler, useState } from 'react'
+import { useFieldArray, useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 const schema = yup
   .object({
-    name: yup.string().required("Required"),
-    description: yup.string().required("Required"),
+    name: yup.string().required('Required'),
+    description: yup.string().required('Required'),
     ingredients: yup
       .array()
       .min(1)
       .of(
         yup.object({
-          name: yup.string().required("Required"),
+          name: yup.string().required('Required'),
           amount: yup
             .number()
-            .typeError("Required")
-            .moreThan(0, "Must be > 0")
-            .required("Required"),
-          amountUnit: yup.string().required("Required"),
+            .typeError('Required')
+            .moreThan(0, 'Must be > 0')
+            .required('Required'),
+          amountUnit: yup.string().required('Required'),
         })
       )
       .required(),
   })
-  .required();
+  .required()
 
 export default function CocktailsNewPage() {
   const {
@@ -41,56 +41,56 @@ export default function CocktailsNewPage() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
-      description: "",
+      name: '',
+      description: '',
       ingredients: [emptyIngredient],
     },
     resolver: yupResolver(schema),
-  });
+  })
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "ingredients",
-  });
+    name: 'ingredients',
+  })
   const [editingIngredientIndex, setEditingIngredientIndex] = useState<
     number | null
-  >(0);
+  >(0)
 
   const handleAddIngredientClick: MouseEventHandler<HTMLButtonElement> = (
     e
   ) => {
-    e.preventDefault();
-    setEditingIngredientIndex(fields.length);
-    append(emptyIngredient);
-  };
+    e.preventDefault()
+    setEditingIngredientIndex(fields.length)
+    append(emptyIngredient)
+  }
 
   const handleEditIngredientClick =
     (ingredientIndex: number): MouseEventHandler<HTMLButtonElement> =>
     (e) => {
-      e.preventDefault();
-      setEditingIngredientIndex(ingredientIndex);
-    };
+      e.preventDefault()
+      setEditingIngredientIndex(ingredientIndex)
+    }
 
   const handleDoneEditingIngredientClick: MouseEventHandler<
     HTMLButtonElement
   > = (e) => {
-    e.preventDefault();
-    setEditingIngredientIndex(null);
-  };
+    e.preventDefault()
+    setEditingIngredientIndex(null)
+  }
 
   const handleTrashIngredientClick =
     (ingredientIndex: number): MouseEventHandler<HTMLButtonElement> =>
     (e) => {
-      e.preventDefault();
-      remove(ingredientIndex);
-    };
+      e.preventDefault()
+      remove(ingredientIndex)
+    }
 
   const onSubmitValid: Parameters<typeof handleSubmit>[0] = (data) => {
-    console.log(data);
-  };
+    console.log(data)
+  }
 
   const onSubmitInvalid: Parameters<typeof handleSubmit>[1] = (errors) => {
-    console.error(errors);
-  };
+    console.error(errors)
+  }
 
   return (
     <section>
@@ -111,7 +111,7 @@ export default function CocktailsNewPage() {
                 id="name"
                 type="text"
                 data-error={!!errors.name}
-                {...register("name")}
+                {...register('name')}
               />
             </FieldWrapper>
 
@@ -124,7 +124,7 @@ export default function CocktailsNewPage() {
               <textarea
                 id="description"
                 data-error={!!errors.description}
-                {...register("description")}
+                {...register('description')}
               />
             </FieldWrapper>
           </FieldSet>
@@ -135,25 +135,25 @@ export default function CocktailsNewPage() {
                 <li key={field.id} className="mb-2">
                   <div
                     className={cn(
-                      "rounded px-2 py-1",
-                      index === editingIngredientIndex && "bg-gray-100",
-                      errors.ingredients?.[index] && "bg-red-100"
+                      'rounded px-2 py-1',
+                      index === editingIngredientIndex && 'bg-gray-100',
+                      errors.ingredients?.[index] && 'bg-red-100'
                     )}
                   >
                     <div className="flex items-start justify-between">
                       <span
                         className={cn(
-                          index === editingIngredientIndex && "text-gray-500"
+                          index === editingIngredientIndex && 'text-gray-500'
                         )}
                       >
-                        {index === editingIngredientIndex && "Editing: "}
+                        {index === editingIngredientIndex && 'Editing: '}
                         <span className="font-semibold">
-                          {watch(`ingredients.${index}.amount`) || "__"}{" "}
-                          {watch(`ingredients.${index}.amountUnit`) || "__"}
-                        </span>{" "}
-                        of{" "}
+                          {watch(`ingredients.${index}.amount`) || '__'}{' '}
+                          {watch(`ingredients.${index}.amountUnit`) || '__'}
+                        </span>{' '}
+                        of{' '}
                         <span className="font-semibold">
-                          {watch(`ingredients.${index}.name`) || "__________"}
+                          {watch(`ingredients.${index}.name`) || '__________'}
                         </span>
                       </span>
                       <div className="flex">
@@ -272,5 +272,5 @@ export default function CocktailsNewPage() {
         </form>
       </div>
     </section>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import { cn } from "../../lib/utils";
-import { FC, HTMLProps, ReactNode } from "react";
+import { cn } from '../../lib/utils'
+import { FC, HTMLProps, ReactNode } from 'react'
 
 type FieldWrapperProps = HTMLProps<HTMLDivElement> & {
-  inputId?: string;
-  label?: ReactNode;
-  invalid?: boolean;
-  errorMessage?: ReactNode;
-  children: ReactNode;
-};
+  inputId?: string
+  label?: ReactNode
+  invalid?: boolean
+  errorMessage?: ReactNode
+  children: ReactNode
+}
 
 export const FieldWrapper: FC<FieldWrapperProps> = ({
   inputId,
@@ -18,7 +18,7 @@ export const FieldWrapper: FC<FieldWrapperProps> = ({
   className,
   ...rest
 }) => (
-  <div className={cn("mb-2", className)} {...rest}>
+  <div className={cn('mb-2', className)} {...rest}>
     {label && (
       <label className="mb-1 block text-sm" htmlFor={inputId}>
         {label}
@@ -29,4 +29,4 @@ export const FieldWrapper: FC<FieldWrapperProps> = ({
 
     {invalid && <p className="mb-1 text-sm text-red-500">{errorMessage}</p>}
   </div>
-);
+)

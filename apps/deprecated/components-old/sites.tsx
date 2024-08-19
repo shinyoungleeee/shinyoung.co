@@ -1,13 +1,13 @@
-import { getSession } from "../lib/auth";
-import { redirect } from "next/navigation";
-import prisma from "../lib/prisma";
-import SiteCard from "./site-card";
-import Image from "next/image";
+import { getSession } from '../lib/auth'
+import { redirect } from 'next/navigation'
+import prisma from '../lib/prisma'
+import SiteCard from './site-card'
+import Image from 'next/image'
 
 export default async function Sites({ limit }: { limit?: number }) {
-  const session = await getSession();
+  const session = await getSession()
   if (!session) {
-    redirect("/login");
+    redirect('/login')
   }
   const sites = await prisma.site.findMany({
     where: {
@@ -16,10 +16,10 @@ export default async function Sites({ limit }: { limit?: number }) {
       },
     },
     orderBy: {
-      createdAt: "asc",
+      createdAt: 'asc',
     },
     ...(limit ? { take: limit } : {}),
-  });
+  })
 
   return sites.length > 0 ? (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -40,5 +40,5 @@ export default async function Sites({ limit }: { limit?: number }) {
         You do not have any sites yet. Create one to get started.
       </p>
     </div>
-  );
+  )
 }

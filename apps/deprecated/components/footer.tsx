@@ -1,4 +1,4 @@
-import ExternalLink from "./external-link";
+import ExternalLink from './external-link'
 
 export default function Nav() {
   return (
@@ -27,5 +27,5 @@ export default function Nav() {
         © Shinyoung Lee 2024 MIT Licensed
       </p>
     </footer>
-  );
+  )
 }

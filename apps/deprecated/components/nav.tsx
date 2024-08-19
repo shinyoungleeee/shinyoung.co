@@ -9,7 +9,7 @@ export default function Nav() {
           <div className="flex flex-row space-x-0 pr-10">
             <a
               className="relative m-1 flex px-2 py-1 align-middle transition-all hover:text-neutral-800 dark:hover:text-neutral-200"
-              href={`//${process.env.NEXT_PUBLIC_ROOT_DOMAIN ?? "shinyoung.co"}`}
+              href={`//${process.env.NEXT_PUBLIC_ROOT_DOMAIN ?? 'shinyoung.co'}`}
             >
               home
             </a>
@@ -23,5 +23,5 @@ export default function Nav() {
         </nav>
       </div>
     </aside>
-  );
+  )
 }

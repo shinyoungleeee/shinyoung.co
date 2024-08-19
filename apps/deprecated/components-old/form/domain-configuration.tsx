@@ -1,47 +1,47 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { useDomainStatus } from "./use-domain-status";
-import { getSubdomain } from "../../lib/domains";
-import { AlertCircle, XCircle } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { useState } from 'react'
+import { useDomainStatus } from './use-domain-status'
+import { getSubdomain } from '../../lib/domains'
+import { AlertCircle, XCircle } from 'lucide-react'
+import { cn } from '../../lib/utils'
 
 export const InlineSnippet = ({
   className,
   children,
 }: {
-  className?: string;
-  children: string;
+  className?: string
+  children: string
 }) => {
   return (
     <span
       className={cn(
-        "inline-block rounded-md bg-blue-100 px-1 py-0.5 font-mono text-blue-900 dark:bg-blue-900 dark:text-blue-100",
+        'inline-block rounded-md bg-blue-100 px-1 py-0.5 font-mono text-blue-900 dark:bg-blue-900 dark:text-blue-100',
         className
       )}
     >
       {children}
     </span>
-  );
-};
+  )
+}
 export default function DomainConfiguration({ domain }: { domain: string }) {
-  const [recordType, setRecordType] = useState<"A" | "CNAME">("A");
+  const [recordType, setRecordType] = useState<'A' | 'CNAME'>('A')
 
-  const { status, domainJson } = useDomainStatus({ domain });
+  const { status, domainJson } = useDomainStatus({ domain })
 
-  if (!status || status === "Valid Configuration" || !domainJson) return null;
+  if (!status || status === 'Valid Configuration' || !domainJson) return null
 
-  const subdomain = getSubdomain(domainJson.name, domainJson.apexName);
+  const subdomain = getSubdomain(domainJson.name, domainJson.apexName)
 
   const txtVerification =
-    (status === "Pending Verification" &&
-      domainJson.verification.find((x: any) => x.type === "TXT")) ||
-    null;
+    (status === 'Pending Verification' &&
+      domainJson.verification.find((x: any) => x.type === 'TXT')) ||
+    null
 
   return (
     <div className="border-t border-stone-200 px-10 pb-5 pt-7 dark:border-stone-700">
       <div className="mb-4 flex items-center space-x-2">
-        {status === "Pending Verification" ? (
+        {status === 'Pending Verification' ? (
           <AlertCircle
             fill="#FBBF24"
             stroke="currentColor"
@@ -59,7 +59,7 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
       {txtVerification ? (
         <>
           <p className="text-sm dark:text-white">
-            Please set the following TXT record on{" "}
+            Please set the following TXT record on{' '}
             <InlineSnippet>{domainJson.apexName}</InlineSnippet> to prove
             ownership of <InlineSnippet>{domainJson.name}</InlineSnippet>:
           </p>
@@ -90,7 +90,7 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
             break it. Please exercise caution when setting this record.
           </p>
         </>
-      ) : status === "Unknown Error" ? (
+      ) : status === 'Unknown Error' ? (
         <p className="mb-5 text-sm dark:text-white">
           {domainJson.error.message}
         </p>
@@ -99,33 +99,33 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
           <div className="flex justify-start space-x-4">
             <button
               type="button"
-              onClick={() => setRecordType("A")}
+              onClick={() => setRecordType('A')}
               className={`${
-                recordType == "A"
-                  ? "border-black text-black dark:border-white dark:text-white"
-                  : "border-white text-stone-400 dark:border-black dark:text-stone-600"
+                recordType == 'A'
+                  ? 'border-black text-black dark:border-white dark:text-white'
+                  : 'border-white text-stone-400 dark:border-black dark:text-stone-600'
               } ease border-b-2 pb-1 text-sm transition-all duration-150`}
             >
-              A Record{!subdomain && " (recommended)"}
+              A Record{!subdomain && ' (recommended)'}
             </button>
             <button
               type="button"
-              onClick={() => setRecordType("CNAME")}
+              onClick={() => setRecordType('CNAME')}
               className={`${
-                recordType == "CNAME"
-                  ? "border-black text-black dark:border-white dark:text-white"
-                  : "border-white text-stone-400 dark:border-black dark:text-stone-600"
+                recordType == 'CNAME'
+                  ? 'border-black text-black dark:border-white dark:text-white'
+                  : 'border-white text-stone-400 dark:border-black dark:text-stone-600'
               } ease border-b-2 pb-1 text-sm transition-all duration-150`}
             >
-              CNAME Record{subdomain && " (recommended)"}
+              CNAME Record{subdomain && ' (recommended)'}
             </button>
           </div>
           <div className="my-3 text-left">
             <p className="my-5 text-sm dark:text-white">
-              To configure your{" "}
-              {recordType === "A" ? "apex domain" : "subdomain"} (
+              To configure your{' '}
+              {recordType === 'A' ? 'apex domain' : 'subdomain'} (
               <InlineSnippet>
-                {recordType === "A" ? domainJson.apexName : domainJson.name}
+                {recordType === 'A' ? domainJson.apexName : domainJson.name}
               </InlineSnippet>
               ), set the following {recordType} record on your DNS provider to
               continue:
@@ -138,13 +138,13 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
               <div>
                 <p className="text-sm font-bold">Name</p>
                 <p className="mt-2 font-mono text-sm">
-                  {recordType === "A" ? "@" : subdomain ?? "www"}
+                  {recordType === 'A' ? '@' : subdomain ?? 'www'}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-bold">Value</p>
                 <p className="mt-2 font-mono text-sm">
-                  {recordType === "A"
+                  {recordType === 'A'
                     ? `76.76.21.21`
                     : `cname.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`}
                 </p>
@@ -163,5 +163,5 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
         </>
       )}
     </div>
-  );
+  )
 }

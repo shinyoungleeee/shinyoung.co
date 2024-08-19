@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function NotFoundPost() {
   return (
@@ -14,5 +14,5 @@ export default function NotFoundPost() {
         Post does not exist, or you do not have permission to edit it
       </p>
     </div>
-  );
+  )
 }

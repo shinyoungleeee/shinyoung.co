@@ -1,12 +1,12 @@
-import { getSession } from "../../../../../lib/auth";
-import prisma from "../../../../../lib/prisma";
-import { notFound, redirect } from "next/navigation";
-import Editor from "../../../../../components-old/editor";
+import { getSession } from '../../../../../lib/auth'
+import prisma from '../../../../../lib/prisma'
+import { notFound, redirect } from 'next/navigation'
+import Editor from '../../../../../components-old/editor'
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const session = await getSession();
+  const session = await getSession()
   if (!session) {
-    redirect("/login");
+    redirect('/login')
   }
   const data = await prisma.post.findUnique({
     where: {
@@ -19,10 +19,10 @@ export default async function PostPage({ params }: { params: { id: string } }) {
         },
       },
     },
-  });
+  })
   if (!data || data.userId !== session.user.id) {
-    notFound();
+    notFound()
   }
 
-  return <Editor post={data} />;
+  return <Editor post={data} />
 }

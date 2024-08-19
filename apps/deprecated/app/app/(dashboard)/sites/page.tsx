@@ -1,8 +1,8 @@
-import { Suspense } from "react";
-import Sites from "../../../../components-old/sites";
-import PlaceholderCard from "../../../../components-old/placeholder-card";
-import CreateSiteButton from "../../../../components-old/create-site-button";
-import CreateSiteModal from "../../../../components-old/modal/create-site";
+import { Suspense } from 'react'
+import Sites from '../../../../components-old/sites'
+import PlaceholderCard from '../../../../components-old/placeholder-card'
+import CreateSiteButton from '../../../../components-old/create-site-button'
+import CreateSiteModal from '../../../../components-old/modal/create-site'
 
 export default function AllSites({ params }: { params: { id: string } }) {
   return (
@@ -30,5 +30,5 @@ export default function AllSites({ params }: { params: { id: string } }) {
         </Suspense>
       </div>
     </div>
-  );
+  )
 }

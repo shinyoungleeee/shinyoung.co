@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ReactNode } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 
 interface ExternalLinkProps {
-  href: string;
-  children: ReactNode;
+  href: string
+  children: ReactNode
 }
 
 export default function ExternalLink({ href, children }: ExternalLinkProps) {
@@ -17,5 +17,5 @@ export default function ExternalLink({ href, children }: ExternalLinkProps) {
       <ArrowUpRight className="h-5 w-5" />
       <p className="ml-2">{children}</p>
     </a>
-  );
+  )
 }

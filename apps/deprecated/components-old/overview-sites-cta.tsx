@@ -1,19 +1,19 @@
-import { getSession } from "../lib/auth";
-import prisma from "../lib/prisma";
-import CreateSiteButton from "./create-site-button";
-import CreateSiteModal from "./modal/create-site";
-import Link from "next/link";
+import { getSession } from '../lib/auth'
+import prisma from '../lib/prisma'
+import CreateSiteButton from './create-site-button'
+import CreateSiteModal from './modal/create-site'
+import Link from 'next/link'
 
 export default async function OverviewSitesCTA() {
-  const session = await getSession();
+  const session = await getSession()
   if (!session) {
-    return 0;
+    return 0
   }
   const sites = await prisma.site.count({
     where: {
       userId: session.user.id as string,
     },
-  });
+  })
 
   return sites > 0 ? (
     <Link
@@ -26,5 +26,5 @@ export default async function OverviewSitesCTA() {
     <CreateSiteButton>
       <CreateSiteModal />
     </CreateSiteButton>
-  );
+  )
 }

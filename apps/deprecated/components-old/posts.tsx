@@ -1,19 +1,19 @@
-import { getSession } from "../lib/auth";
-import { redirect } from "next/navigation";
-import prisma from "../lib/prisma";
-import PostCard from "./post-card";
-import Image from "next/image";
+import { getSession } from '../lib/auth'
+import { redirect } from 'next/navigation'
+import prisma from '../lib/prisma'
+import PostCard from './post-card'
+import Image from 'next/image'
 
 export default async function Posts({
   siteId,
   limit,
 }: {
-  siteId?: string;
-  limit?: number;
+  siteId?: string
+  limit?: number
 }) {
-  const session = await getSession();
+  const session = await getSession()
   if (!session?.user) {
-    redirect("/login");
+    redirect('/login')
   }
   const posts = await prisma.post.findMany({
     where: {
@@ -21,13 +21,13 @@ export default async function Posts({
       ...(siteId ? { siteId } : {}),
     },
     orderBy: {
-      updatedAt: "desc",
+      updatedAt: 'desc',
     },
     include: {
       site: true,
     },
     ...(limit ? { take: limit } : {}),
-  });
+  })
 
   return posts.length > 0 ? (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -48,5 +48,5 @@ export default async function Posts({
         You do not have any posts yet. Create one to get started.
       </p>
     </div>
-  );
+  )
 }

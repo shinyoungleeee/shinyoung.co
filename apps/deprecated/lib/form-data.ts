@@ -1,22 +1,22 @@
-import { AmountUnit, IngredientType } from "@prisma/client";
+import { AmountUnit, IngredientType } from '@prisma/client'
 
 export type Option = {
-  label: string;
-  value: string | number;
-};
+  label: string
+  value: string | number
+}
 
-export const emptyIngredient = { name: "", amount: 0, amountUnit: "" };
+export const emptyIngredient = { name: '', amount: 0, amountUnit: '' }
 
-export const amountUnitOptions = [AmountUnit.Oz] as const;
+export const amountUnitOptions = [AmountUnit.Oz] as const
 
 export const ingredientTypes: Option[] = Object.keys(IngredientType).map(
   (key) => ({
     label: key,
     value: key,
-  }),
-);
+  })
+)
 
 export const yesOrNoOptions: Option[] = [
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
-];
+  { label: 'Yes', value: 'yes' },
+  { label: 'No', value: 'no' },
+]

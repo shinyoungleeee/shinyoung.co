@@ -1,4 +1,4 @@
-import LoadingDots from "../../../components-old/icons/loading-dots";
+import LoadingDots from '../../../components-old/icons/loading-dots'
 
 export default function Loading() {
   return (
@@ -8,5 +8,5 @@ export default function Loading() {
         <LoadingDots />
       </div>
     </>
-  );
+  )
 }

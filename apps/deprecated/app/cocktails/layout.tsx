@@ -1,6 +1,6 @@
-import Footer from "../../components/footer";
-import Nav from "../../components/nav";
-import { ReactNode } from "react";
+import Footer from '../../components/footer'
+import Nav from '../../components/nav'
+import { ReactNode } from 'react'
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
@@ -13,5 +13,5 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
         <Footer />
       </div>
     </main>
-  );
+  )
 }

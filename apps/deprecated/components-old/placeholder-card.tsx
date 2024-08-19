@@ -8,5 +8,5 @@ export default function PlaceholderCard() {
         <div className="mt-2 h-3 w-1/2 animate-pulse rounded-lg bg-stone-100 dark:bg-stone-800" />
       </div>
     </div>
-  );
+  )
 }

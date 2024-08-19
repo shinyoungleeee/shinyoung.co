@@ -1,10 +1,10 @@
-import Image from "next/image";
-import LoginButton from "./login-button";
-import { Suspense } from "react";
+import Image from 'next/image'
+import LoginButton from './login-button'
+import { Suspense } from 'react'
 
 export default function LoginPage() {
   return (
-    <div className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md">
+    <div className="mx-5 border border-stone-200 py-10 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md dark:border-stone-700">
       <Image
         alt="Platforms Starter Kit"
         width={100}
@@ -12,7 +12,7 @@ export default function LoginPage() {
         className="relative mx-auto h-12 w-auto dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
         src="/logo.png"
       />
-      <h1 className="mt-6 text-center font-cal text-3xl dark:text-white">
+      <h1 className="font-cal mt-6 text-center text-3xl dark:text-white">
         Platforms Starter Kit
       </h1>
       <p className="mt-2 text-center text-sm text-stone-600 dark:text-stone-400">
@@ -37,5 +37,5 @@ export default function LoginPage() {
         </Suspense>
       </div>
     </div>
-  );
+  )
 }

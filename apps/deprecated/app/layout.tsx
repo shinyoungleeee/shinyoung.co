@@ -1,13 +1,13 @@
-import { Analytics } from "@vercel/analytics/react";
-import { Metadata } from "next";
-import { cn } from "../lib/utils";
-import { cal, inter } from "../styles/fonts";
-import "../styles/globals.css";
-import { Providers } from "./providers";
+import { Analytics } from '@vercel/analytics/react'
+import { Metadata } from 'next'
+import { cn } from '../lib/utils'
+import { cal, inter } from '../styles/fonts'
+import '../styles/globals.css'
+import { Providers } from './providers'
 
-const title = "Shinyoung Lee's Porfolio";
+const title = "Shinyoung Lee's Porfolio"
 const description =
-  "Portfolio for Shinyoung Lee, Lead Software Engineer and Manager";
+  'Portfolio for Shinyoung Lee, Lead Software Engineer and Manager'
 
 export const metadata: Metadata = {
   title,
@@ -17,17 +17,17 @@ export const metadata: Metadata = {
     description,
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title,
     description,
-    creator: "@shinyoungleeee",
+    creator: '@shinyoungleeee',
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -38,5 +38,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+  )
 }
