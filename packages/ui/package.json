@@ -8,6 +8,7 @@
     ".": "./src/index.ts",
     "./button": "./src/components/button.tsx",
     "./dropdown-menu": "./src/components/dropdown-menu.tsx",
+    "./hover-card": "./src/components/hover-card.tsx",
     "./light-dark-toggle": "./src/components/light-dark-toggle.tsx",
     "./main-nav": "./src/components/main-nav.tsx",
     "./mobile-link": "./src/components/mobile-link.tsx",

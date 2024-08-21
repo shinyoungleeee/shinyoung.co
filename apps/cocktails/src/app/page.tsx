@@ -37,7 +37,7 @@ const cocktails = [
   },
 ]
 
-export default function CocktailMenu(): JSX.Element {
+export default function CocktailsMenuPage() {
   return (
     <div className="container text-center font-serif">
       <div className="max-w-prose md:mx-auto">

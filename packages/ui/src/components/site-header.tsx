@@ -42,7 +42,7 @@ export function SiteHeader(): JSX.Element {
 
           <nav className="flex items-center">
             <Link
-              href={`https://github.com/shinyoungleeee/shinyoung.co${githubTreePath || ''}`}
+              href={`https://github.com/shinyoungleeee/shinyoung.co${githubTreePath}`}
               rel="noreferrer"
               target="_blank"
             >
