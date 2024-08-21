@@ -1,6 +1,5 @@
 {
   "extends": ["//"],
-  "globalEnv": ["API_BASE_URL"],
   "tasks": {
     "build": {
       "outputs": [".next/**", "!.next/cache/**"]
